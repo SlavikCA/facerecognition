@@ -272,4 +272,17 @@ class ImageMapper extends QBMapper {
 			->andWhere($qb->expr()->eq('model', $qb->createNamedParameter($image->getModel())))
 			->execute();
 	}
+
+	/**
+	 * Drop all Images from that user.
+	 *
+	 * @param string $userId user to drop from table.
+	 */
+	public function resetUser(string $userId) {
+		$qb = $this->db->getQueryBuilder();
+		$qb->delete($this->getTableName())
+			->where($qb->expr()->eq('user', $qb->createNamedParameter($userId)))
+			->execute();
+	}
+
 }

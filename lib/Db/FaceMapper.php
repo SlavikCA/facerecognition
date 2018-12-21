@@ -141,4 +141,16 @@ class FaceMapper extends QBMapper {
 			->execute();
 	}
 
+	/**
+	 * Drop all Faces from that user.
+	 *
+	 * @param string $userId user to drop from table.
+	 */
+	public function resetUser(string $userId) {
+		$qb = $this->db->getQueryBuilder();
+		$qb->delete($this->getTableName())
+			->where($qb->expr()->eq('user', $qb->createNamedParameter($userId)))
+			->execute();
+	}
+
 }
